@@ -9,10 +9,10 @@ cmake_minimum_required(VERSION 3.5)
 project(BoringSSL LANGUAGES C CXX)
 
 set( BUILD_SHARED_LIB TRUE )
-
 if ( WIN32 )
    set(  OPENSSL_NO_ASM TRUE )
 endif()
+
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CLANG 1)
@@ -126,7 +126,7 @@ if(BUILD_SHARED_LIBS)
   add_definitions(-DBORINGSSL_SHARED_LIBRARY)
   # Enable position-independent code globally. This is needed because
   # some library targets are OBJECT libraries.
-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+  set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 endif()
 
 include_directories(src/include)
@@ -377,11 +377,13 @@ add_library(
   src/crypto/asn1/a_mbstr.c
   src/crypto/asn1/a_object.c
   src/crypto/asn1/a_octet.c
+  src/crypto/asn1/a_print.c
   src/crypto/asn1/a_strex.c
   src/crypto/asn1/a_strnid.c
   src/crypto/asn1/a_time.c
   src/crypto/asn1/a_type.c
   src/crypto/asn1/a_utctm.c
+  src/crypto/asn1/a_utf8.c
   src/crypto/asn1/asn1_lib.c
   src/crypto/asn1/asn1_par.c
   src/crypto/asn1/asn_pack.c
@@ -428,12 +430,10 @@ add_library(
   src/crypto/cipher_extra/tls_cbc.c
   src/crypto/conf/conf.c
   src/crypto/cpu_aarch64_apple.c
-  src/crypto/cpu_aarch64_freebsd.c
   src/crypto/cpu_aarch64_fuchsia.c
   src/crypto/cpu_aarch64_linux.c
   src/crypto/cpu_aarch64_win.c
   src/crypto/cpu_arm.c
-  src/crypto/cpu_arm_freebsd.c
   src/crypto/cpu_arm_linux.c
   src/crypto/cpu_intel.c
   src/crypto/cpu_ppc64le.c
